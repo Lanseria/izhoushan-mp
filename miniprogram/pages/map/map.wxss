@@ -42,18 +42,24 @@ map {
   height: 50%;
   margin: auto;
 }
+.change_scale,
 .change_model {
   background: #ffffff;
   box-shadow: 0 4rpx 30rpx -4rpx rgba(0, 0, 0, 0.14),
     0 4rpx 4rpx -4rpx rgba(0, 0, 0, 0.13);
   border-radius: 10rpx;
-  width: 202rpx;
   height: 48rpx;
+  top: -90rpx;
   display: flex;
-  padding: 10rpx;
   position: absolute;
-  top: 469rpx;
+  padding: 10rpx;
+}
+.change_model {
   right: 30rpx;
+}
+.change_scale {
+  width: auto;
+  right: 220rpx;
 }
 .change_model image {
   width: 48rpx;

@@ -8,6 +8,8 @@ Page({
     location: "", // 经纬度输入框
     address: "", // 地址输入框
     model: 0, // 模式转换 0-地址输入，1-经纬度输入
+    scale: 0, // 模式转换 0-缩小，1-放大
+    height: "640rpx",
     marker: {
       // 地图当前标记点
       id: 0, // 标记点ID，不用变更
@@ -17,6 +19,7 @@ Page({
       width: "20", // 标记点图标宽度
       height: "20", // 标记点图标高度
     },
+    markers: [],
     info: {
       // 地图点位信息
       address: "-", // 常规地址
@@ -37,6 +40,7 @@ Page({
         // 获取成功
         that.setInfo([parseFloat(res.latitude), parseFloat(res.longitude)]); // 设置经纬度信息
         that.getLocation(); // 获取当前位置点
+        that.getDbCloudPrj();
       },
       fail(e) {
         // 获取失败
@@ -65,12 +69,13 @@ Page({
       model: that.data.model === 0 ? 1 : 0, // 如果为0则设置1，如果为1则设置0
     });
   },
-  /**
-   * 点击地图
-   * @param {*} e 页面载入参数
-   */
-  clickMap(e) {
-    const { latitude, longitude } = e.detail; // 获取点击的经纬度信息
+  changescale() {
+    that.setData({
+      height: that.data.scale === 0 ? "100vh" : "640rpx",
+      scale: that.data.scale === 0 ? 1 : 0, // 如果为0则设置1，如果为1则设置0
+    });
+  },
+  clickPosition(latitude, longitude) {
     let data = {};
     if (that.data.model === 1) {
       // 如果模式在经纬度输入
@@ -78,6 +83,21 @@ Page({
     }
     that.setInfo([latitude, longitude], 2, data); // 更改标记点信息
     that.getLocation({ latitude, longitude }); // 调用方法，传入经纬度，更新地址信息
+  },
+  clickMarker(e) {
+    const { markerId } = e.detail; // 获取点击的Marker信息
+    const marker = that.data.markers.find((m) => m.id === markerId);
+    console.log(marker);
+    const { latitude, longitude } = marker;
+    that.clickPosition(latitude, longitude);
+  },
+  /**
+   * 点击地图
+   * @param {*} e 页面载入参数
+   */
+  clickMap(e) {
+    const { latitude, longitude } = e.detail; // 获取点击的经纬度信息
+    that.clickPosition(latitude, longitude);
   },
   /**
    * 地图范围改变
@@ -214,5 +234,29 @@ Page({
       });
     }
     that.setData(data);
+  },
+  getDbCloudPrj() {
+    const db = wx.cloud.database();
+    db.collection("project").get({
+      success: function (res) {
+        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
+        const markers = res.data.map((m, id) => {
+          return {
+            // 地图当前标记点
+            id: id,
+            _id: m._id, // 标记点ID，不用变更
+            latitude: m.location.lat, // 标记点所在纬度
+            longitude: m.location.lng, // 标记点所在经度
+            iconPath: "../../asset/local-red.png", // 标记点图标，png或jpg类型
+            width: "20", // 标记点图标宽度
+            height: "20", // 标记点图标高度
+            title: m.name,
+          };
+        });
+        that.setData({
+          markers,
+        });
+      },
+    });
   },
 });
