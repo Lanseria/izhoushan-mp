@@ -237,7 +237,10 @@ Page({
     that.setData(data);
   },
   _getAlpha(timeUnix) {
-    const percent = (dayjs().unix() - timeUnix) / 280000;
+    let percent = (dayjs().unix() - timeUnix) / 320000;
+    if (percent >= 1) {
+      percent = 1
+    }
     return percent;
   },
   getDbCloudPrj() {
