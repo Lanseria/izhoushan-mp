@@ -54,17 +54,12 @@ map {
   position: absolute;
   padding: 10rpx;
 }
-.change_model {
-  right: 30rpx;
-}
-.change_scale {
-  width: auto;
-  right: 220rpx;
-}
+.change_scale image,
 .change_model image {
   width: 48rpx;
   height: 48rpx;
 }
+.change_scale view,
 .change_model view {
   font-size: 28rpx;
   color: var(--mb-color);
@@ -72,6 +67,13 @@ map {
   text-align: right;
   font-weight: 400;
   margin: auto;
+}
+.change_model {
+  right: 0;
+}
+.change_scale {
+  width: auto;
+  right: 200rpx;
 }
 .info_model {
   background-color: #ffffff;

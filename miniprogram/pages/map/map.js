@@ -1,3 +1,4 @@
+const dayjs = require("../../dayjs.min.js");
 const app = getApp(); // 获取全局APP对象
 let that = null; // 页面this指针变量
 Page({
@@ -235,28 +236,36 @@ Page({
     }
     that.setData(data);
   },
+  _getAlpha(timeUnix) {
+    const percent = (dayjs().unix() - timeUnix) / 280000;
+    return percent;
+  },
   getDbCloudPrj() {
     const db = wx.cloud.database();
-    db.collection("project").get({
-      success: function (res) {
-        // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
-        const markers = res.data.map((m, id) => {
-          return {
-            // 地图当前标记点
-            id: id,
-            _id: m._id, // 标记点ID，不用变更
-            latitude: m.location.lat, // 标记点所在纬度
-            longitude: m.location.lng, // 标记点所在经度
-            iconPath: "../../asset/local-red.png", // 标记点图标，png或jpg类型
-            width: "20", // 标记点图标宽度
-            height: "20", // 标记点图标高度
-            title: m.name,
-          };
-        });
-        that.setData({
-          markers,
-        });
-      },
-    });
+    db.collection("project")
+      .orderBy("createdAt", "asc")
+      .get({
+        success: function (res) {
+          // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
+          const markers = res.data.map((m, id) => {
+            return {
+              // 地图当前标记点
+              id: id,
+              _id: m._id, // 标记点ID，不用变更
+              latitude: m.location.lat, // 标记点所在纬度
+              longitude: m.location.lng, // 标记点所在经度
+              iconPath: "../../asset/local-red.png", // 标记点图标，png或jpg类型
+              width: "20", // 标记点图标宽度
+              height: "20", // 标记点图标高度
+              title: m.name,
+              // alpha: that._getAlpha(m.createdAt),
+              alpha: that._getAlpha(m.createdAt),
+            };
+          });
+          that.setData({
+            markers,
+          });
+        },
+      });
   },
 });

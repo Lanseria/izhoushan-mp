@@ -1,7 +1,8 @@
 <map longitude="{{longitude}}" style="height:{{height}};" scale="12" enable-3D="true" enable-building="true" latitude="{{latitude}}" bindregionchange="changeMap" bindtap="clickMap" bindmarkertap="clickMarker" show-location="true" markers="{{markers}}"></map>
 <view class="fixed_model">
   <view class="change_scale" bindtap="changescale">
-    <text>{{scale==0?'放大':'缩小'}}</text>
+    <image src="../../asset/full.svg"></image>
+    <view>{{scale==0?'放大':'缩小'}}</view>
   </view>
   <view class="change_model" bindtap="changemodel">
     <image src="../../asset/change.svg"></image>
