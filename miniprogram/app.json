@@ -1,5 +1,10 @@
 {
-  "pages": ["pages/index/index", "pages/map/map"],
+  "pages": [
+    "pages/index/index",
+    "pages/map/map",
+    "pages/news/news",
+    "pages/article/article"
+  ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置展示"
@@ -12,5 +17,8 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  }
 }

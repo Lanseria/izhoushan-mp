@@ -10,7 +10,7 @@ Page({
     address: "", // 地址输入框
     model: 0, // 模式转换 0-地址输入，1-经纬度输入
     scale: 0, // 模式转换 0-缩小，1-放大
-    height: "640rpx",
+    height: "740rpx",
     marker: {
       // 地图当前标记点
       id: 0, // 标记点ID，不用变更
@@ -239,7 +239,7 @@ Page({
   _getAlpha(timeUnix) {
     let percent = (dayjs().unix() - timeUnix) / 320000;
     if (percent >= 1) {
-      percent = 1
+      percent = 1;
     }
     return percent;
   },

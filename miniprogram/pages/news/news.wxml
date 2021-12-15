@@ -1,0 +1,8 @@
+<!-- pages/news.wxml -->
+<view>
+  <mp-cells ext-class="my-cells" title="疫情新闻列表">
+    <mp-cell wx:for="{{news}}" wx:for-item="item" wx:key="_id" id="{{index}}" data-id="{{item._id}}" bindtap="openArticle">
+      <view>{{item.title}}</view>
+    </mp-cell>
+  </mp-cells>
+</view>

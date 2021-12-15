@@ -1,0 +1,2 @@
+<!-- pages/article/article.wxml -->
+<mp-article title="{{title}}" public-time="{{publicTime}}" content="{{content}}"></mp-article>

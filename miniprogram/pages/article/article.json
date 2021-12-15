@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "mp-article": "../../comp/article"
+  }
+}
