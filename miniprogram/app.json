@@ -1,9 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/map/map",
-    "pages/news/news",
-    "pages/article/article"
+    "pages/map/map"
   ],
   "permission": {
     "scope.userLocation": {
