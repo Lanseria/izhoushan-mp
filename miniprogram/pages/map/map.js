@@ -237,6 +237,7 @@ Page({
     that.setData(data);
   },
   _getAlpha(timeUnix) {
+    console.log(timeUnix, dayjs().unix())
     let percent = (dayjs().unix() - timeUnix) / 320000;
     if (percent >= 1) {
       percent = 1;
@@ -245,8 +246,11 @@ Page({
   },
   getDbCloudPrj() {
     const db = wx.cloud.database();
-    db.collection("project")
-      .orderBy("createdAt", "asc")
+    db.collection("positions")
+      .orderBy("happenedAt", "desc")
+      .where({
+        category: '1'
+      })
       .get({
         success: function (res) {
           // res.data 是一个包含集合中有权限访问的所有记录的数据，不超过 20 条
@@ -255,14 +259,13 @@ Page({
               // 地图当前标记点
               id: id,
               _id: m._id, // 标记点ID，不用变更
-              latitude: m.location.lat, // 标记点所在纬度
-              longitude: m.location.lng, // 标记点所在经度
+              latitude: m.lat, // 标记点所在纬度
+              longitude: m.lng, // 标记点所在经度
               iconPath: "../../asset/local-red.png", // 标记点图标，png或jpg类型
               width: "20", // 标记点图标宽度
               height: "20", // 标记点图标高度
               title: m.name,
-              // alpha: that._getAlpha(m.createdAt),
-              alpha: that._getAlpha(m.createdAt),
+              alpha: that._getAlpha(m.happenedAt),
             };
           });
           that.setData({
