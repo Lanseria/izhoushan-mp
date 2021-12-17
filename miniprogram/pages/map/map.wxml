@@ -16,15 +16,15 @@
 </view>
 <view class="info_model">
   <view class="info_item">
-    <view>经纬度</view>
-    <view>{{info.location}}</view>
+    <view>发生时间</view>
+    <view>{{marker.happenedAt}}</view>
   </view>
   <view class="info_item">
-    <view>推荐地址</view>
-    <view>{{info.formatted}}</view>
+    <view>发生地址</view>
+    <view>{{marker.title}}</view>
   </view>
   <view class="info_item">
-    <view>常规地址</view>
+    <view>附近地址</view>
     <view>{{info.address}}</view>
   </view>
   <view class="info_item">

@@ -19,6 +19,8 @@ Page({
       iconPath: "../../asset/local.png", // 标记点图标，png或jpg类型
       width: "20", // 标记点图标宽度
       height: "20", // 标记点图标高度
+      happenedAt: dayjs().format("YYYY-MM-DD HH:mm"),
+      title: "-",
     },
     markers: [],
     info: {
@@ -89,6 +91,9 @@ Page({
     const { markerId } = e.detail; // 获取点击的Marker信息
     const marker = that.data.markers.find((m) => m.id === markerId);
     console.log(marker);
+    that.setData({
+      marker,
+    });
     const { latitude, longitude } = marker;
     that.clickPosition(latitude, longitude);
   },
@@ -237,8 +242,7 @@ Page({
     that.setData(data);
   },
   _getAlpha(timeUnix) {
-    console.log(timeUnix, dayjs().unix())
-    let percent = (dayjs().unix() - timeUnix) / 320000;
+    let percent = (dayjs().unix() - timeUnix) / (14 * 60 * 60 * 24);
     if (percent >= 1) {
       percent = 1;
     }
@@ -249,7 +253,7 @@ Page({
     db.collection("positions")
       .orderBy("happenedAt", "desc")
       .where({
-        category: '1'
+        category: "1",
       })
       .get({
         success: function (res) {
@@ -266,6 +270,7 @@ Page({
               height: "20", // 标记点图标高度
               title: m.name,
               alpha: that._getAlpha(m.happenedAt),
+              happenedAt: dayjs.unix(m.happenedAt).format("YYYY-MM-DD HH:mm"),
             };
           });
           that.setData({
