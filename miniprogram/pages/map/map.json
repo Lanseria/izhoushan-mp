@@ -1,5 +1,4 @@
 {
   "usingComponents": {},
-  "backgroundColorTop": "#FFFFFF",
-  "backgroundColorBottom": "#f4f4f4"
+  "navigationBarTitleText": "舟山实时核酸采样点"
 }

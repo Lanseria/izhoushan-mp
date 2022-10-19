@@ -1,34 +1,16 @@
-<map longitude="{{longitude}}" style="height:{{height}};" scale="12" enable-3D="true" enable-building="true" latitude="{{latitude}}" bindregionchange="changeMap" bindtap="clickMap" bindmarkertap="clickMarker" show-location="true" markers="{{markers}}"></map>
-<view class="fixed_model">
-  <view class="change_scale" bindtap="changescale">
-    <image src="../../asset/full.svg"></image>
-    <view>{{scale==0?'放大':'缩小'}}</view>
-  </view>
-  <view class="change_model" bindtap="changemodel">
-    <image src="../../asset/change.svg"></image>
-    <view>{{model==0?'转经纬度':'转地址'}}</view>
-  </view>
-  <!-- <view class="title">{{model==0?'地址':'经纬度'}}</view>
-  <input class="in" bindinput="oninput" value="{{model==0?address:location}}" data-key="{{model==0?'address':'location'}}" placeholder="{{model==0?'拖动地图定位位置或输入地址':'如：22.5401,113.9345'}}" cursor-spacing="20" />
-  <view class="btn" bindtap="query">
-    <image src="../../asset/local.svg"></image>
-  </view> -->
-</view>
-<view class="info_model">
-  <view class="info_item">
-    <view>发生时间</view>
-    <view>{{marker.happenedAt}}</view>
-  </view>
-  <view class="info_item">
-    <view>发生地址</view>
-    <view>{{marker.title}}</view>
-  </view>
-  <view class="info_item">
-    <view>附近地址</view>
-    <view>{{info.address}}</view>
-  </view>
-  <view class="info_item">
-    <view>行政区</view>
-    <view>{{info.adinfo}}</view>
-  </view>
+<!--pages/map-control/map-control.wxml-->
+<view class="map-control-container">
+  <map class="map" id="map" latitude="{{location.latitude}}" longitude="{{location.longitude}}" scale="9" min-scale="9"
+    show-location="{{showPosition}}" show-compass="{{isShowCompass}}" markers="{{markers}}" show-scale="{{isShowScale}}"
+    bindmarkertap="onTapMarker">
+    <cover-view class="cover-view">
+      <view wx:for="{{statusList}}" wx:key="value" wx:for-item="item" class="btn" style="color: {{item.color}}"
+        data-id="{{item.value}}" bindtap="setFilter">
+        <view class="svg_icon">
+          <image class="svg_icon-inner" src="../../asset/icon.svg" />
+        </view>
+        {{item.label}}
+      </view>
+    </cover-view>
+  </map>
 </view>

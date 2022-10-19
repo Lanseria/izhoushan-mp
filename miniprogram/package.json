@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "wx-axios-promise": "^2.4.1"
+  }
+}

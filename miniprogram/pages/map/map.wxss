@@ -1,103 +1,47 @@
-page {
-  background-color: #f4f4f4;
-  padding-bottom: 48rpx;
-}
-map {
+/* pages/map-control/map-control.wxss */
+.map-control-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background: #F8F8F7;
   width: 100%;
-  height: 740rpx;
+  height: 100%;
 }
-.fixed_model {
-  position: relative;
-  background: #ffffff;
-  box-shadow: 0 4rpx 32rpx -4rpx rgba(0, 0, 0, 0.14),
-    0 4rpx 4rpx -4rpx rgba(0, 0, 0, 0.13);
-  border-radius: 16rpx;
-  padding: 0 40rpx;
-  height: 1rpx;
-  width: 650rpx;
-  /* height: 108rpx; */
-  /* margin: -84rpx auto 0; */
+
+
+.map {
+  width: 100%;
+  height: 100%;
 }
-.fixed_model .title {
-  font-size: 34rpx;
-  color: var(--mb-color);
-}
-.fixed_model .in {
-  font-size: 34rpx;
-  margin-top: 12rpx;
-  color: var(--mb-color);
-  font-weight: 300;
-}
-.fixed_model .btn {
+
+.cover-view {
   position: absolute;
-  background: #f0f0f0;
-  width: 96rpx;
-  height: 96rpx;
-  right: 30rpx;
-  top: 36rpx;
-  border-radius: 50%;
-  display: flex;
+  bottom: 80rpx;
+  left: 50rpx;
 }
-.btn image {
-  width: 50%;
-  height: 50%;
-  margin: auto;
-}
-.change_scale,
-.change_model {
-  background: #ffffff;
-  box-shadow: 0 4rpx 30rpx -4rpx rgba(0, 0, 0, 0.14),
-    0 4rpx 4rpx -4rpx rgba(0, 0, 0, 0.13);
-  border-radius: 10rpx;
-  height: 48rpx;
-  top: -90rpx;
-  display: flex;
-  position: absolute;
-  padding: 10rpx;
-}
-.change_scale image,
-.change_model image {
-  width: 48rpx;
-  height: 48rpx;
-}
-.change_scale view,
-.change_model view {
-  font-size: 28rpx;
-  color: var(--mb-color);
-  letter-spacing: 0;
-  text-align: right;
-  font-weight: 400;
-  margin: auto;
-}
-.change_model {
-  right: 0;
-}
-.change_scale {
-  width: auto;
-  right: 200rpx;
-}
-.info_model {
+
+.cover-view button {
   background-color: #ffffff;
-  width: 690rpx;
-  margin: 32rpx auto;
-  border-radius: 16rpx;
 }
-.info_model .info_item {
-  padding: 40rpx;
-  min-height: 48rpx;
+
+.btn {
+  background: #fff;
+  margin-top: 10rpx;
+  padding: 10rpx 20rpx;
   display: flex;
 }
-.info_model .info_item view {
-  font-size: 32rpx;
-  color: var(--lb-color);
-  width: 35%;
+
+.svg_icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
 }
-.info_model .info_item view + view {
-  font-size: 32rpx;
-  color: #000000;
-  width: 65%;
-  text-align: right;
-}
-.info_model .info_item + .info_item {
-  box-shadow: inset 0 2rpx 0 0 rgba(224, 224, 224, 0.5);
+
+.svg_icon-inner {
+  width: 1em;
+  height: 1em;
+  transform: translateY(-1em);
+  filter: drop-shadow(0 1em 0 currentColor);
 }
