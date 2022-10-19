@@ -1,14 +1,12 @@
 <!--pages/map-control/map-control.wxml-->
 <view class="map-control-container">
-  <map class="map" id="map" latitude="{{location.latitude}}" longitude="{{location.longitude}}" scale="9" min-scale="9"
+  <map class="map" id="map" latitude="{{location.latitude}}" longitude="{{location.longitude}}" scale="9" min-scale="7"
     show-location="{{showPosition}}" show-compass="{{isShowCompass}}" markers="{{markers}}" show-scale="{{isShowScale}}"
     bindmarkertap="onTapMarker">
     <cover-view class="cover-view">
       <view wx:for="{{statusList}}" wx:key="value" wx:for-item="item" class="btn" style="color: {{item.color}}"
         data-id="{{item.value}}" bindtap="setFilter">
-        <view class="svg_icon">
-          <image class="svg_icon-inner" src="../../asset/icon.svg" />
-        </view>
+        <image class="icon" src="../../asset/mdi_medical-cotton-swab.svg" />
         {{item.label}}
       </view>
     </cover-view>

@@ -33,6 +33,7 @@ Page({
         label: "休息"
       },
     ],
+    showPosition: true,
     location: {
       latitude: 30.040415,
       longitude: 122.273511
@@ -58,6 +59,7 @@ Page({
     });
   },
   setFilter(e) {
+    console.log(e)
     const { currentTarget } = e
     const { dataset } = currentTarget
     let { filter } = this.data
@@ -66,6 +68,13 @@ Page({
       filter
     })
     this.setMarkers()
+  },
+  _iconPath(status) {
+    if (status !== null) {
+      return '../../asset/' + status + '.png'
+    } else {
+      return '../../asset/3.png'
+    }
   },
   setMarkers() {
     const { rawData, filter } = this.data
@@ -83,11 +92,20 @@ Page({
         longitude: +item.gisLng,
         width: 10,
         height: 10,
-        iconPath: `../../asset/${item.serviceStatus || 3}.png`
+        iconPath: this._iconPath(item.serviceStatus)
       }
     })
     this.setData({
       markers: markers
+    })
+    const mapCtx = wx.createMapContext('map', this);
+    const points = this.data.markers.map(m => ({
+      latitude: m.latitude,
+      longitude: m.longitude
+    }))
+    mapCtx.includePoints({
+      points,
+      padding: [36, 36, 10, 36]
     })
   },
   async fetchData() {
